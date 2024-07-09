@@ -3,7 +3,7 @@
 You don't need to pretend climbing mountains is a personality trait! 🏔️ 
 ## 🚀 What is GatchaBitch?
 
-GatchaBitch is a web-based gacha game that puts the "fun" in "fundamentally addictive gambling mechanics." Unlike *some* games that shall remain nameless (Like Genshin Impact), I don't bother with a half-baked story. I cut straight to the chase: pure, unadulterated gacha! Mostly because its a pain in the ass to make the rest and Claude got them rate limits.
+GachaBitch is a web-based gacha game that puts the "fun" in "fundamentally addictive gambling mechanics." Unlike *some* games that shall remain nameless (Like Genshin Impact), I don't bother with a half-baked story. I cut straight to the chase: pure, unadulterated gacha! Mostly because its a pain in the ass to make the rest and Claude got them rate limits.
 
 ### 🌈 Features That'll Make You Say "Wow, This Isn't Genshin!"
 
