@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Character, Rarity } from '../types';
 import { rarityColors, rarityDisplay } from '../data/characters';
 import CharacterModal from './CharacterModal';
@@ -9,17 +9,30 @@ interface CollectionProps {
   darkMode: boolean;
 }
 
+interface CharacterWithCount extends Character {
+  count: number;
+}
+
 const Collection: React.FC<CollectionProps> = ({ collection, pullHistory, darkMode }) => {
   const [sortBy, setSortBy] = useState<'rarest' | 'leastRare' | 'newest' | 'oldest'>('rarest');
-  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
+  const [selectedCharacter, setSelectedCharacter] = useState<CharacterWithCount | null>(null);
   const [viewMode, setViewMode] = useState<'collection' | 'history'>('collection');
+  const [uniqueCollection, setUniqueCollection] = useState<CharacterWithCount[]>([]);
 
-  const uniqueCollection = Array.from(new Set(collection.map(char => char.id)))
-    .map(id => {
-      const char = collection.find(c => c.id === id)!;
-      const count = collection.filter(c => c.id === id).length;
-      return { ...char, count };
-    });
+  useEffect(() => {
+    const characterCounts = pullHistory.reduce((acc, char) => {
+      acc[char.id] = (acc[char.id] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+
+    const newUniqueCollection = Array.from(new Set(pullHistory.map(char => char.id)))
+      .map(id => {
+        const char = pullHistory.find(c => c.id === id)!;
+        return { ...char, count: characterCounts[id] };
+      });
+
+    setUniqueCollection(newUniqueCollection);
+  }, [pullHistory]);
 
   const sortedCollection = [...uniqueCollection].sort((a, b) => {
     if (sortBy === 'rarest' || sortBy === 'leastRare') {
@@ -27,8 +40,8 @@ const Collection: React.FC<CollectionProps> = ({ collection, pullHistory, darkMo
       const rarityDiff = rarityOrder.indexOf(b.rarity) - rarityOrder.indexOf(a.rarity);
       return sortBy === 'rarest' ? rarityDiff : -rarityDiff;
     } else {
-      const aIndex = collection.findIndex(char => char.id === a.id);
-      const bIndex = collection.findIndex(char => char.id === b.id);
+      const aIndex = pullHistory.findIndex(char => char.id === a.id);
+      const bIndex = pullHistory.findIndex(char => char.id === b.id);
       return sortBy === 'newest' ? aIndex - bIndex : bIndex - aIndex;
     }
   });
