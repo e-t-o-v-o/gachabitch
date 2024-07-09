@@ -1,4 +1,4 @@
-# 🎰 GatchaBitch: The REAL Gacha Experience 🌟
+# 🎰 GachaBitch: The REAL Gacha Experience 🌟
 
 Welcome to GachaBitch, where we don't pretend climbing mountains is a personality trait! 🏔️ (Looking at you, Mihoyo 👀)
 
