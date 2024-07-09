@@ -7,7 +7,7 @@ GachaBitch is a web-based gacha game that puts the "fun" in "fundamentally addic
 
 ### 🌈 Features That'll Make You Say "Wow, This Isn't Genshin!"
 
-- **No Pity System**: Because life isn't fair, and neither am I! 😈
+- **No Pity System**: Because life isn't fair, and neither am I! 😈 (nevermind, pity is now fixed)
 - **Characters That Don't Need 20GB of Voice Lines**: Our PNGs are mute, but they're honest about it.
 - **A UI That Doesn't Require a PhD to Navigate**: You heard me.
 - **Absolutely Zero Exploration**: No more pretending you enjoy climbing cliffs for hours!

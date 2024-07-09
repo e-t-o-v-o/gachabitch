@@ -199,21 +199,21 @@ const PullSection: React.FC<PullSectionProps> = ({
           onClick={() => performPull(1)}
           disabled={showAnimation}
         >
-          Single (💰100)
+          Single Pull (100 💰)
         </button>
         <button
           className="bg-purple-500 hover:bg-purple-600 px-4 py-2 rounded text-white transition-colors"
           onClick={() => performPull(10)}
           disabled={showAnimation}
         >
-          10x (💰1000)
+          10x Pull (1000 💰)
         </button>
         <button
           className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded text-white transition-colors"
           onClick={() => performPull(1, true)}
           disabled={showAnimation || freeTickets < 1}
         >
-          Free Pull ({freeTickets} left)
+          Free Ticket Pull ({freeTickets} left)
         </button>
       </div>
       
