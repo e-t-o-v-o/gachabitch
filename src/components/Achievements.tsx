@@ -4,17 +4,17 @@ import { Character } from '../types';
 interface AchievementsProps {
   achievements: string[];
   claimedAchievements: string[];
-  darkMode: boolean;
   onClaimReward: (achievement: string) => void;
+  darkMode: boolean;
   onRedeemCouchSurferEtovo: () => void;
   collection: Character[];
 }
 
-const Achievements: React.FC<AchievementsProps> = ({ 
-  achievements, 
-  claimedAchievements, 
-  darkMode, 
+const Achievements: React.FC<AchievementsProps> = ({
+  achievements,
+  claimedAchievements,
   onClaimReward,
+  darkMode,
   onRedeemCouchSurferEtovo,
   collection
 }) => {

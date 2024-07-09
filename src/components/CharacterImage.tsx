@@ -14,17 +14,11 @@ const CharacterImage: React.FC<CharacterImageProps> = ({ src, alt, className }) 
   // Local caching mechanism
   const cachedImages: { [key: string]: string } = {};
 
-  useEffect(() => {
-    setImageError(false);
-    setRetryCount(0);
-  }, [src]);
-
-  const loadImage = (url: string) => {
+  const loadImage = (url: string): Promise<string> => {
     if (cachedImages[url]) {
-      return cachedImages[url];
+      return Promise.resolve(cachedImages[url]);
     }
 
-    // Add a unique query parameter to bypass caching
     const uniqueUrl = `${url}${url.includes('?') ? '&' : '?'}nocache=${new Date().getTime()}`;
     
     return new Promise<string>((resolve, reject) => {
@@ -37,6 +31,14 @@ const CharacterImage: React.FC<CharacterImageProps> = ({ src, alt, className }) 
       img.src = uniqueUrl;
     });
   };
+
+  useEffect(() => {
+    setImageError(false);
+    setRetryCount(0);
+    loadImage(src)
+      .then(() => setImageError(false))
+      .catch(handleImageError);
+  }, [src]);
 
   const handleImageError = () => {
     if (retryCount < maxRetries) {

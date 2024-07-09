@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Character } from './types';
+import { characters } from './data/characters';
 import Header from './components/Header';
 import PullSection from './components/PullSection';
 import Collection from './components/Collection';
@@ -90,6 +91,14 @@ const App: React.FC = () => {
     }
   };
 
+  const handleRedeemCouchSurferEtovo = () => {
+    const couchSurferEtovo = characters.find(char => char.name === 'Couch Surfer etovo');
+    if (couchSurferEtovo && !collection.some(char => char.name === 'Couch Surfer etovo')) {
+      setCollection(prev => [...prev, couchSurferEtovo]);
+      alert("Congratulations! You've unlocked Couch Surfer etovo!");
+    }
+  };
+
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-black'}`}>
       <Header 
@@ -130,6 +139,8 @@ const App: React.FC = () => {
             claimedAchievements={claimedAchievements}
             onClaimReward={handleClaimAchievement}
             darkMode={darkMode}
+            onRedeemCouchSurferEtovo={handleRedeemCouchSurferEtovo}
+            collection={collection}
           />
         </div>
       </main>
