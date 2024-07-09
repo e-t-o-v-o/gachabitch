@@ -132,7 +132,7 @@ const App: React.FC = () => {
           pullHistory={pullHistory} 
           darkMode={darkMode} 
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+        <div className="mt-8 space-y-8">
           <GameInfo darkMode={darkMode} />
           <Achievements 
             achievements={achievements}

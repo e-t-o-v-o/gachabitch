@@ -47,10 +47,11 @@ const Collection: React.FC<CollectionProps> = ({ collection, pullHistory, darkMo
 
   return (
     <div className={`mt-8 ${bgColor} p-6 rounded-lg shadow-lg`}>
-        
       <div className="flex justify-between items-center mb-4">
         <h2 className={`text-2xl font-bold ${textColor}`}>
-          {viewMode === 'collection' ? `Collection (${uniqueCollection.length})` : 'Pull History'}
+          {viewMode === 'collection' 
+            ? `Collection (${uniqueCollection.length})` 
+            : `Pull History (Total Pulls: ${pullHistory.length})`}
         </h2>
         <div className="space-x-4">
           <button
@@ -86,7 +87,7 @@ const Collection: React.FC<CollectionProps> = ({ collection, pullHistory, darkMo
             {sortedCollection.map((character) => (
               <div
                 key={character.id}
-                className={`${rarityColors[character.rarity]} p-2 rounded-lg shadow-lg cursor-pointer transition-transform hover:scale-105`}
+                className={`${rarityColors[character.rarity]} p-2 rounded-lg shadow-lg cursor-pointer transition-transform hover:scale-105 relative`}
                 onClick={() => setSelectedCharacter(character)}
               >
                 <div className="w-full aspect-square overflow-hidden rounded-lg mb-2">
@@ -95,7 +96,9 @@ const Collection: React.FC<CollectionProps> = ({ collection, pullHistory, darkMo
                 <h3 className="font-bold text-sm mb-1 truncate text-white">{character.name}</h3>
                 <p className="text-xs mb-1 text-white">{rarityDisplay[character.rarity]}</p>
                 {character.count > 1 && (
-                  <p className="text-xs text-white">x{character.count}</p>
+                  <div className="absolute top-1 right-1 bg-blue-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold">
+                    {character.count}
+                  </div>
                 )}
               </div>
             ))}
@@ -104,7 +107,8 @@ const Collection: React.FC<CollectionProps> = ({ collection, pullHistory, darkMo
       )}
       
       {viewMode === 'history' && (
-        <div className="h-96 overflow-y-auto">{Object.entries(groupedPullHistory).map(([date, chars]) => (
+        <div className="h-96 overflow-y-auto">
+          {Object.entries(groupedPullHistory).map(([date, chars]) => (
             <div key={date} className={`${bgColor} p-4 rounded-lg mb-4`}>
               <h3 className={`text-lg font-semibold mb-2 ${textColor}`}>{date}</h3>
               <div className="space-y-2">

@@ -177,7 +177,7 @@ const PullSection: React.FC<PullSectionProps> = ({
           onClick={() => performPull(1, true)}
           disabled={showAnimation || freeTickets < 1}
         >
-          Free Ticket Pull ({freeTickets} left)
+          Free Pulls ({freeTickets} left)
         </button>
       </div>
       

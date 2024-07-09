@@ -18,7 +18,7 @@ const Achievements: React.FC<AchievementsProps> = ({
   onRedeemCouchSurferEtovo,
   collection
 }) => {
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const allAchievements = [
     { name: 'First Pull', description: 'Perform your first character pull', reward: 100 },
@@ -39,6 +39,10 @@ const Achievements: React.FC<AchievementsProps> = ({
     }
   };
 
+  const claimableAchievements = allAchievements.filter(
+    achievement => achievements.includes(achievement.name) && !claimedAchievements.includes(achievement.name)
+  );
+
   return (
     <div className={`${bgColor} p-6 rounded-lg shadow-lg`}>
       <button 
@@ -49,6 +53,25 @@ const Achievements: React.FC<AchievementsProps> = ({
         <span>{isExpanded ? '▼' : '►'}</span>
       </button>
       
+      {!isExpanded && claimableAchievements.length > 0 && (
+        <div className="mt-2">
+          <h3 className={`text-lg font-semibold mb-2 ${textColor}`}>Claimable Achievements</h3>
+          <div className="space-y-2">
+            {claimableAchievements.map((achievement) => (
+              <div key={achievement.name} className="flex justify-between items-center">
+                <span className={textColor}>{achievement.name}</span>
+                <button
+                  className="px-2 py-1 bg-yellow-500 text-white rounded text-sm"
+                  onClick={() => handleClaim(achievement.name)}
+                >
+                  Claim
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {isExpanded && (
         <div className="space-y-4">
           {allAchievements.map((achievement) => (
