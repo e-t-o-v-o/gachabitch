@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Character, Rarity } from '../types';
 import { characters, rarityProbabilities, rarityColors, rarityDisplay } from '../data/characters';
 import PullAnimation from './PullAnimation';
 import CharacterModal from './CharacterModal';
-import CharacterImage from './CharacterImage';
 
 interface PullSectionProps {
   credits: number;
@@ -18,6 +17,8 @@ interface PullSectionProps {
   freeTickets: number;
   setFreeTickets: React.Dispatch<React.SetStateAction<number>>;
 }
+
+const PITY_THRESHOLD = 90;
 
 const PullSection: React.FC<PullSectionProps> = ({
   credits,
@@ -35,8 +36,21 @@ const PullSection: React.FC<PullSectionProps> = ({
   const [pullResults, setPullResults] = useState<Character[]>([]);
   const [showAnimation, setShowAnimation] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
+  const [pityCounter, setPityCounter] = useState(0);
+
+  useEffect(() => {
+    // Initialize pity counter based on pull history
+    const lastFiveStarIndex = [...pullHistory].reverse().findIndex(char => char.rarity === Rarity.FiveStar);
+    setPityCounter(lastFiveStarIndex === -1 ? pullHistory.length : Math.min(lastFiveStarIndex, PITY_THRESHOLD - 1));
+  }, []);
 
   const pullCharacter = (): Character => {
+    if (pityCounter >= PITY_THRESHOLD - 1) {
+      // Guaranteed 5-star pull
+      const fiveStarCharacters = characters.filter(char => char.rarity === Rarity.FiveStar);
+      return fiveStarCharacters[Math.floor(Math.random() * fiveStarCharacters.length)];
+    }
+
     const rand = Math.random();
     let cumulativeProbability = 0;
     let selectedRarity: Rarity = Rarity.OneStar;
@@ -67,11 +81,20 @@ const PullSection: React.FC<PullSectionProps> = ({
     setShowAnimation(true);
     setTimeout(() => {
       const pulledCharacters: Character[] = [];
+      let newPityCounter = pityCounter;
 
       for (let i = 0; i < times; i++) {
         const character = pullCharacter();
         pulledCharacters.push(character);
+
+        if (character.rarity === Rarity.FiveStar) {
+          newPityCounter = 0;
+        } else {
+          newPityCounter = Math.min(newPityCounter + 1, PITY_THRESHOLD - 1);
+        }
       }
+
+      setPityCounter(newPityCounter);
 
       if (!useFreeTicket) {
         setCredits((prev) => prev - times * 100);
@@ -104,12 +127,6 @@ const PullSection: React.FC<PullSectionProps> = ({
         setAchievements((prev) => [...prev, 'Dedicated Puller']);
       }
 
-      // Check for Five Star Collector achievement
-      const totalFiveStars = pullHistory.concat(pulledCharacters).filter(char => char.rarity === Rarity.FiveStar).length;
-      if (totalFiveStars >= 5 && !achievements.includes('Five Star Collector')) {
-        setAchievements((prev) => [...prev, 'Five Star Collector']);
-      }
-
       setShowAnimation(false);
     }, 2000);
   };
@@ -120,34 +137,27 @@ const PullSection: React.FC<PullSectionProps> = ({
   return (
     <div className={`${bgColor} p-6 rounded-lg shadow-lg text-center`}>
       <h2 className={`text-2xl font-bold mb-4 ${textColor}`}>Pull Characters</h2>
+      <p className={`mb-4 ${textColor}`}>Pity Counter: {pityCounter} / {PITY_THRESHOLD}</p>
       
       {pullResults.length > 0 && (
         <div className="mb-4">
           {pullResults.length === 1 ? (
             <div className="flex justify-center items-center">
               <div className={`${rarityColors[pullResults[0].rarity]} p-4 rounded-lg shadow-lg w-64`}>
-                <CharacterImage
-                  src={pullResults[0].image}
-                  alt={pullResults[0].name}
-                  className="w-full h-64 rounded-lg mb-2"
-                />
+                <img src={pullResults[0].image} alt={pullResults[0].name} className="w-full h-64 object-contain rounded-lg mb-2" />
                 <h3 className="font-bold text-lg mb-1 text-white">{pullResults[0].name}</h3>
                 <p className="text-sm mb-1 text-white">{rarityDisplay[pullResults[0].rarity]}</p>
               </div>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-5 gap-4">
               {pullResults.map((character, index) => (
                 <div
                   key={index}
                   className={`${rarityColors[character.rarity]} p-2 rounded-lg shadow-lg cursor-pointer`}
                   onClick={() => setSelectedCharacter(character)}
                 >
-                  <CharacterImage
-                    src={character.image}
-                    alt={character.name}
-                    className="w-full h-40 rounded-lg mb-2"
-                  />
+                  <img src={character.image} alt={character.name} className="w-full h-32 object-contain rounded-lg mb-2" />
                   <h3 className="font-bold text-sm mb-1 text-white">{character.name}</h3>
                   <p className="text-xs mb-1 text-white">{rarityDisplay[character.rarity]}</p>
                 </div>
@@ -177,7 +187,7 @@ const PullSection: React.FC<PullSectionProps> = ({
           onClick={() => performPull(1, true)}
           disabled={showAnimation || freeTickets < 1}
         >
-          Free Pulls ({freeTickets} left)
+          Free Ticket Pull ({freeTickets} left)
         </button>
       </div>
       
