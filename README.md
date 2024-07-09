@@ -1,46 +1,63 @@
-# Getting Started with Create React App
+# 🎰 GatchaBitch: The REAL Gacha Experience 🌟
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to GachaBitch, where we don't pretend climbing mountains is a personality trait! 🏔️ (Looking at you, Mihoyo 👀)
 
-## Available Scripts
+## 🚀 What is GatchaBitch?
 
-In the project directory, you can run:
+GatchaBitch is a web-based gacha game that puts the "fun" in "fundamentally addictive gambling mechanics." Unlike *some* games that shall remain nameless (Like Genshin Impact), I don't bother with a half-baked story. I cut straight to the chase: pure, unadulterated gacha! Mostly because its a pain in the ass to make the rest and Claude got them rate limits.
 
-### `npm start`
+### 🌈 Features That'll Make You Say "Wow, This Isn't Genshin!"
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **No Pity System**: Because life isn't fair, and neither am I! 😈
+- **Characters That Don't Need 20GB of Voice Lines**: Our PNGs are mute, but they're honest about it.
+- **A UI That Doesn't Require a PhD to Navigate**: You heard me.
+- **Absolutely Zero Exploration**: No more pretending you enjoy climbing cliffs for hours!
+- **Free Pulls That Are Actually Free**: No strings attached.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 🛠️ Tech Stack
 
-### `npm test`
+- **React**: Because I'm basic, but in a good way.
+- **TypeScript**: For when JavaScript just isn't frustrating enough.
+- **Tailwind CSS**: Because Claude told me so.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚀 Getting Started
 
-### `npm run build`
+1. Clone this repo (or not, I dont care)
+2. Run `npm install` (pray to RNGesus it works first try)
+3. `npm start` and watch the magic happen
+4. Profit
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🐳 Why GachaBitch is Better Than Your Favorite Gacha
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Not Genshin Impact**: No more pretending you care about the 500th NPC's backstory, and trying to excuse the fact that we still have stamina bars in games.
+- **Not Star Rail**: Our lack of story is a feature, not a bug.
+- **Not Honkai Impact 3rd**: Our menu doesn't require a user manual.
+- **Almost Azur Lane**: But let's be real, nothing beats shipgirl waifus.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🏆 Achievements
 
-### `npm run eject`
+Unlock achievements like:
+- "First Pull": Congrats, you know how to click a button!
+- "Broke and Desperate": You've spent all your currency... again.
+- "RNGesus Hates You": For when you pull your 100th common item in a row.
+(some of these may or may not be actual achievements)
+## 🐞 Known Issues
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- May not run, if it doesnt its your fault.
+- Your wallet will have too much money in it
+- You might start seeing gacha pulls in your dreams
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🤝 Contributing
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Found a bug? Keep it to yourself, it's probably a feature or your fault entirely.
+Want to add a feature? Ask yourself: "What would Azur Lane do?"
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 📜 License
 
-## Learn More
+Licensed under the "etovo" License of Public Excellence.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🙏 Special Thanks
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Special thanks to Azur Lane for showing us what a REAL gacha game looks like. You da real MVP fr fr ong 🏆
+
+Remember, gacha responsibly! And if you can't gacha responsibly, well den das tuff. 🎭
